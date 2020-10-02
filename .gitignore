@@ -1,3 +1,5 @@
 .vscode
 clnt_svc/rprintmsg
 clnt_svc/msg_server
+xdr/rls
+xdr/dir_svc
