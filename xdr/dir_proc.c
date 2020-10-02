@@ -16,6 +16,7 @@ readdir_res* readdir_1_svc(nametype* dirname, struct svc_req* sr)
     namelist           nl;
     namelist*          nlp;
     static readdir_res res; /* must be static! */
+
     /*
      * Open directory
      */
@@ -25,10 +26,12 @@ readdir_res* readdir_1_svc(nametype* dirname, struct svc_req* sr)
         res.errno = errno;
         return (&res);
     }
+
     /*
-     * Free pre vious result
+     * Free previous result
      */
     xdr_free(xdr_readdir_res, &res);
+
     /*
      * Collect directory entries.
      * Memory allocated here will be freed by xdr_free
@@ -42,10 +45,12 @@ readdir_res* readdir_1_svc(nametype* dirname, struct svc_req* sr)
         nlp       = &nl->next;
     }
     *nlp = NULL;
+
     /*
      * Return the result
      */
     res.errno = 0;
     closedir(dirp);
+
     return (&res);
 }
